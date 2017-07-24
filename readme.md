@@ -1,4 +1,4 @@
-# 关于admin.client #
+# 关于bkr.admin #
 基于angularjs的管理后台客户端雏形
 
 # 首次安装 #

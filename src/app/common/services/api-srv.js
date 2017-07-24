@@ -14,7 +14,7 @@ let _ = require('lodash');
  * @param AppConfigs           配置项
  * @param MessageSrv           消息服务
  */
-function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv, DateSrv, SessionSrv, CommonConstants) {
+function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv, DateSrv, SessionSrv) {
     'ngInject';
 
     const TOKEN_KEY = AppConfigs.USER_TOKEN_KEY;
