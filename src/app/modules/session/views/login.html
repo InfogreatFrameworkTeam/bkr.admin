@@ -1,0 +1,27 @@
+<div class="login_wrapper">
+    <div class="form login_form animated fadeInDown">
+        <section class="login_content">
+            <form name="loginForm" class="form-horizontal" novalidate>
+                <h1>管理员登陆</h1>
+                <div class="form-group text-left">
+                    <input name="name" class="form-control" max-length="255" placeholder="请输入邮箱地址" ng-model="vm.user.name" validator="required, email" valid-method="submit"/>
+                </div>
+                <div class="form-group text-left">
+                    <input type="password" name="password" class="form-control" max-length="10" placeholder="请输入密码" ng-model="vm.user.password" validator="required, minlength=4" valid-method="submit"/>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="vm.login()" validation-submit="loginForm">登 陆</button>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </section>
+    </div>
+    <div class="login_footer text-center animated rotateIn">
+        <div>
+            <h2>
+                <i class="fa fa-paw"></i> XXX 管理系统
+            </h2>
+            <p>©2016 All Rights Reserved. </p>
+        </div>
+    </div>
+</div>
