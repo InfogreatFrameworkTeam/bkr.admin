@@ -9,21 +9,21 @@ function RoleEditCtrl($controller, RoleSrv) {
     let vm = this;
 
     // 取得详情后处理
-    function afterGetDetail(data) {
+    function postGetDetailFn(data) {
         vm.permissionList = RoleSrv.convPermissionForView(data.permissions);
         return data;
     }
 
     // 更新前处理
-    function beforeSave() {
+    function preSaveFn() {
         // 编辑权限列表成为字符串数组形式
         vm.model.permissions = RoleSrv.convPermissionForSave(vm.permissionList);
     }
 
     let ctrlOpts = {
             modelName: 'role',
-            afterGetDetail,
-            beforeSave
+            postGetDetailFn,
+            preSaveFn
         };
     angular.extend(this, $controller('BaseCrudCtrl', { vm: vm, ctrlOpts}));
 

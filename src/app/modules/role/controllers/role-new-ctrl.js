@@ -9,14 +9,14 @@ function RoleNewCtrl($controller, RoleSrv) {
     let vm = this;
 
     // 更新前处理
-    function beforeSave() {
+    function preSaveFn() {
         // 编辑权限列表成为字符串数组形式
         vm.model.permissions = RoleSrv.convPermissionForSave(vm.permissionList);
     }
 
     let ctrlOpts = {
         modelName: 'role',
-        beforeSave
+        preSaveFn
     };
 
     angular.extend(this, $controller('BaseCrudCtrl', { vm: vm, ctrlOpts }));

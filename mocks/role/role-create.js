@@ -13,8 +13,7 @@ module.exports = {
     '/api/role/create': {
         POST: {
             data: {
-                status: 1,
-                message: '新增角色成功！'
+                status: 1
             }
         }
     }

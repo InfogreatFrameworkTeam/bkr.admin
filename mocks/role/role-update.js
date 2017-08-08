@@ -14,8 +14,7 @@ module.exports = {
     '/api/role/update': {
         POST: {
             data: {
-                status: 1,
-                message: '变更角色信息成功！'
+                status: 1
             }
         }
     }

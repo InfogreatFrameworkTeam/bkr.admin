@@ -16,14 +16,15 @@ function RoleSrv(CodeList) {
 	            text: value,
 	            selected: selected
 	        };
-	    });   	
+	    });
     }
 
     function convPermissionForSave(permissionList) {
     	return _
             .chain(permissionList)
             .filter(o => o.selected)
-            .map(o => o.name);
+            .map(o => o.name)
+            .value();
     }
 
     return {

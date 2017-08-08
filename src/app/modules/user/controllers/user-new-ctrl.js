@@ -3,27 +3,15 @@
  */
 'use strict';
 
-function UserNewCtrl($controller, UploadSrv) {
+function UserNewCtrl($controller) {
     'ngInject';
 
     let vm = this;
-    let uploader;
 
-    function beforeSave() {
-        let photo = uploader.getFile() || null;
-        vm.model.photo = photo;
-    }
-    
     let ctrlOpts = {
-            modelName: 'user',
-            beforeSave
+            modelName: 'user'
         };
     angular.extend(this, $controller('BaseCrudCtrl', { vm: vm, ctrlOpts }));
-
-
-    // 上传组件
-    uploader = UploadSrv.createImageUploader();
-    vm.uploader = uploader;
 }
 
 module.exports = {

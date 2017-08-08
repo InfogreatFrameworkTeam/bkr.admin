@@ -9,8 +9,7 @@ module.exports = {
     '/api/role/delete': {
         POST: {
             data: {
-                status: 1,
-                message: '删除角色成功！'
+                status: 1
             }
         }
     }

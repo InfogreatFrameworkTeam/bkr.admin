@@ -7,17 +7,20 @@ let MessageList = {
 	'error.number': '{{p0}}必须是数字。',
 	'error.minlength': '最小长度不正确。',
 	'error.maxlength': '超过了最大长度。',
-	'error.alphaNumber': '请输入英文或数字。',	
-	'error.fileUpload': '文件上传时发生错误，请重新上传。',
-	'File extension error.': '上传文件的格式错误。',
+	'error.alphaNumber': '请输入英文或数字。',
+    'error.fileUpload': '文件上传时发生错误，请重新上传。',
+    'error.fileExtension': '只能上传以下扩展名的文件{{p0}}',
+    'error.fileSize': '只能上传不大于{{p0}}的文件',
+    'error.fileLimit': '只能上传不超过{{p0}}个文件',
 	'confirm.update': '确定要更新吗？',
-	'confirm.regist': '确定要做成吗？',
+	'confirm.create': '确定要新建吗？',
 	'confirm.save': '确定要保存吗？',
-	'confirm.delete': '确定要删除吗？',	
+	'confirm.delete': '确定要删除吗？',
 	'confirm.logout': '确定要退出吗？',
-	'confirm.dateNoSave':'变更的数据将不会保存，确认换页吗？',
 	'message.updateOk': '更新成功',
-	'message.saveOk': '保存成功'
+	'message.saveOk': '保存成功',
+	'message.createOk': '新建成功',
+	'message.deleteOk': '删除成功',
 };
 
 module.exports = {
