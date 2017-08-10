@@ -1,17 +1,40 @@
 'use strict';
-
 /**
- * 控制器基类：列表控制器
+ * @class BaseListCtrl 控制器基类：列表控制器
+ * @alias module:common/controllers.BaseListCtrl
  *
- * @param {[type]} $location     [description]
- * @param {[type]} NgTableParams [description]
- * @param {[type]} ApiSrv        [description]
- * @param {[type]} TableSrv      [description]
- * @param {Object} vm            控制器的value model
- * @param {Object} ctrlOpts	必须	{
- *                               		modelName,	// 必须 String, 模型的名称
- *                               	 	getDataFun	// 可选 Function, 取得数据的自定义处理
- *                                	}
+ * @param $location
+ * @param NgTableParams ng-table的实例
+ * @param ApiSrv    API服务
+ * @param tableSrv  表服务
+ * @param {Object} vm  控制器的value model
+ * @param {Object} ctrlOpts
+ * @param {String} ctrlOpts.modelName 模型的名称
+ * @param {String} ctrlOpts.dataUrl 扩展 api url
+ * @param {Function} [ctrlOpts.preSearchFn] 检索前处理
+ * @param {Function} [ctrlOpts.postSearchFn] 检索后处理
+ * @param {Object} ctrlOpts.defaultCondition 默认检索条件
+ *
+ * @example
+ *
+ *  // 检索前处理
+ *  function preSearchFn(apiParams) {
+ *      console.log(apiParams);
+ *  }
+ *  // 检索后处理
+ *  function postSearchFn(list) {
+ *      console.log(list);
+ *  }
+ *  // 扩展自list控制器基类
+ *  let ctrlOpts = {
+ *          modelName: 'adminRole',
+ *          preSearchFn: preSearchFn,
+ *          postSearchFn: postSearchFn,
+ *          dataUrl: 'getDetail',
+ *          defaultCondition: 'defaultCondition',
+ *          defaultSortCols: Object 可选 默认排序列
+ *      };
+ *  angular.extend(this, $controller('BaseListCtrl', { vm: vm, ctrlOpts: ctrlOpts }));
  */
 function BaseListCtrl($location, NgTableParams, ApiSrv, TableSrv, vm, ctrlOpts) {
     'ngInject';
@@ -26,7 +49,12 @@ function BaseListCtrl($location, NgTableParams, ApiSrv, TableSrv, vm, ctrlOpts) 
 
     // 重置
     vm.reset = function() {
-        vm.searchCondition = angular.copy({});
+        if (ctrlOpts.defaultCondition) {
+            vm.searchCondition = angular.copy(ctrlOpts.defaultCondition);
+        } else {
+            vm.searchCondition = angular.copy({});
+        }
+
         tableSrv.reset(vm.searchCondition);
         vm.search();
     };
@@ -38,15 +66,31 @@ function BaseListCtrl($location, NgTableParams, ApiSrv, TableSrv, vm, ctrlOpts) 
 
     // 初始化
     (function init() {
-        vm.searchCondition = {};
+        if (ctrlOpts.defaultCondition) {
+            vm.searchCondition = angular.copy(ctrlOpts.defaultCondition);
+        } else {
+            vm.searchCondition = {};
+        }
+        let getDataUrl;
+        if (ctrlOpts.dataUrl) {
+            getDataUrl = ctrlOpts.modelName + ctrlOpts.dataUrl;
+        } else {
+            getDataUrl = ctrlOpts.modelName + '/list';
+        }
         tableSrv = new TableSrv({
             searchCondition: vm.searchCondition,
-            getDataUrl: ctrlOpts.modelName + '/list'
+            getDataUrl: getDataUrl,
+            preSearchFn: ctrlOpts.preSearchFn,
+            postSearchFn: ctrlOpts.postSearchFn,
+            defaultSortCols: ctrlOpts.defaultSortCols
         });
         vm.tableParams = tableSrv.create();
     })();
 }
 
+/**
+ * BaseListCtrl 基础一览控制器
+ */
 module.exports = {
     name: 'BaseListCtrl',
     fn: BaseListCtrl

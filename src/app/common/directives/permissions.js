@@ -1,38 +1,43 @@
 'use strict';
 
-const ADMIN_ROLE_ID = 1;
+const ADMIN_USER_ID = '1';
 
 /**
- * 权限控制组件
- * 将当前element上需要的权限与用户的权限进行比较， 如果没有访问权限则隐藏
- * @param  {[SessionSrv]} SessionSrv [Session服务]
- * @return {[angular directive]}            [directive]
+ * @class PermissionsDirective 权限控制组件
+ * @alias module:common/directives.PermissionsDirective
+ *
+ * @param  {SessionSrv} Session服务
+ * @return {Directive}
+ *
+ * @example
+ *     permissions="user.view, user.edit"
  */
-function permissions(SessionSrv) {
+function PermissionsDirective(SessionSrv) {
     'ngInject';
 
     function _isAdmin(currentUser) {
-        return (currentUser.roleId === ADMIN_ROLE_ID);
+        return (currentUser.id == ADMIN_USER_ID);
     }
 
     /**
-     * [_link description]
-     * @param  {[type]} scope [description]
-     * @param  {[type]} elem  [description]
-     * @param  {String or String Array} attrs [permissions: 访问权限]
-     * @return {[type]}       [description]
+     * _link
+     * @param  scope
+     * @param  elem
+     * @param  attrs
+     *             permissions 权限列表，以逗号分隔
+     * @return directive
      */
-	function _link(scope, elem, attrs) {
+    function _link(scope, elem, attrs) {
         let currentUser = SessionSrv.getCurrentUser();
         if (_isAdmin(currentUser)) {
             return;
         }
 
-		let elePermissions = attrs.permissions.split(',');
-		let userPermissions = [];
-		if (currentUser) {
-			userPermissions = currentUser.permissions || [];
-		}
+        let elePermissions = attrs.permissions.split(',');
+        let userPermissions = [];
+        if (currentUser) {
+            userPermissions = currentUser.actionList || [];
+        }
 
         let hasPermissions = false;
         for (let i = 0; i < elePermissions.length; i++) {
@@ -42,11 +47,11 @@ function permissions(SessionSrv) {
                 break;
             }
         }
-		
-		if (!hasPermissions) {
-			elem.remove();
-		}		
-	}
+
+        if (!hasPermissions) {
+            elem.remove();
+        }
+    }
 
     let directive = {
         restrict: 'A',
@@ -57,5 +62,5 @@ function permissions(SessionSrv) {
 
 module.exports = {
     name: 'permissions',
-    fn: permissions
+    fn: PermissionsDirective
 };
