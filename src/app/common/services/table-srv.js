@@ -21,9 +21,7 @@ function TableSrv($location, NgTableParams, ApiSrv) {
          *                      searchCondition: Object 检索条件
          *                      getDataFun: Function 执行getData时的自定义处理
          *                      getDataUrl: String API调用的URL
-         *                   } 
-         *                      
-         * @return {[type]}      [description]
+         *                   }
          */
         constructor(opts = {}) {
             this.opts = opts;
@@ -76,7 +74,7 @@ function TableSrv($location, NgTableParams, ApiSrv) {
 
         /**
          * 重置检索条件
-         * @param  {Object} searchCondition [检索条件]     
+         * @param  {Object} searchCondition [检索条件]
          */
         reset(searchCondition) {
             this.opts.searchCondition = searchCondition;

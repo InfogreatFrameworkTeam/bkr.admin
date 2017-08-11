@@ -1,13 +1,23 @@
 'use strict';
 
+/**
+ * @class TextFormatFilter 文本文字格式化
+ * 将文本格式中的特殊文字转义 *
+ * @alias module:common/filters.TextFormatFilter
+ *
+ * @example
+ *   ng-bind-html="model.memo | textFormat"
+ */
 function TextFormatFilter() {
     'ngInject';
     return function(input) {
         if (!input) {
-        	return input;
+            return input;
         }
         let output = input
-        	.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/, '&amp;')
+            .replace(/&/, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
             //replace possible line breaks.
             .replace(/(\r\n|\r|\n)/g, '<br/>')
             //replace tabs

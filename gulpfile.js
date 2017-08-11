@@ -32,7 +32,8 @@ const gulp = require('gulp'),
     url = require('url'),
     _ = require('lodash'),
     nodeResolve = require('resolve'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    jsdoc = require('gulp-jsdoc3');
 
 const production = (process.env.NODE_ENV === 'production');
 const buildConfig = require('./build/buildConfig.json');
@@ -47,6 +48,7 @@ const paths = {
     styleApp: [src + 'app/styles/app.scss'],
     script: [src + 'app/**/*.js', src + 'base/**/*.js'],
     scriptApp: src + 'app/app.js',
+    appLib: src + 'libs/**/*',
     mock: ['./mocks/**/*.js']
 };
 const assetExtensions = [
@@ -146,19 +148,16 @@ function bundle() {
 gulp.task('lib', function() {
     let filterJS = gulpFilter('**/*.js', { restore: true });
     return gulp.src('./bower.json')
-        .pipe(mainBowerFiles({
-            overrides: {
-                plupload: {
-                    main: [
-                        './js/plupload.dev.js',
-                        './js/moxie.js'
-                    ]
-                }
-            }
-        }))
+        .pipe(mainBowerFiles())
         .pipe(filterJS)
         .pipe(filterJS.restore)
         .pipe(gulp.dest(dest + '/lib'));
+});
+
+gulp.task('app-lib', function() {
+    return gulp.src(paths.appLib)
+        .pipe(gulp.dest(dest + '/libs'))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('js-vendor', function() {
@@ -283,6 +282,13 @@ gulp.task('mock', function() {
         .pipe(restEmulator(options));
 });
 
+// 文档生成
+gulp.task('doc', function (cb) {
+    var config = require('./build/jsdocConfig.json');
+    gulp.src(['readme.md', './src/**/*.js'], {read: false})
+        .pipe(jsdoc(config, cb));
+});
+
 // 启动监视
 gulp.task('watch', function() {
     watch(paths.index, function() {
@@ -306,34 +312,89 @@ gulp.task('watch', function() {
 });
 
 // 打包
-function buildAll() {
-    runSequence('clean', [
+function buildAll(isOpenBrowser, isOpenMock) {
+    let defaultTasks = [
         'index',
         'image',
         'lib',
+        'app-lib',
         'js-vendor',
         'jsHint',
         'js-app',
         'css-vendor',
         'sass',
         'fonts',
+        'doc',
+        'mock',
         'watch',
-        'mock'
-    ], [
-        'browser-sync'
-    ]);
+    ];
+
+    if (isOpenBrowser) {
+        runSequence('clean', defaultTasks, [
+            'browser-sync'
+        ]);
+    } else {
+        let dropCnt = isOpenMock ? 1 : 2;
+        defaultTasks = _.dropRight(defaultTasks, isOpenMock);
+        runSequence('clean', defaultTasks);
+    }
 }
 
-// 打包 -- 开发环境
+// 打包 -- 本地开发环境
 gulp.task('default', function(cb) {
     process.env.NODE_ENV = 'dev';
-    buildAll();
+    buildAll(true);
 });
 
-// 打包 -- 测试环境
-gulp.task('test', function(cb) {
+// 打包 -- 开发机环境
+gulp.task('dev', function(cb) {
     process.env.NODE_ENV = 'test';
-    buildAll();
+    buildAll(false, false);
+});
+
+// 打包 -- STAGING测试环境
+gulp.task('staging', function(cb) {
+    process.env.NODE_ENV = 'staging';
+    buildAll(false, false);
+});
+
+// 打包 -- STAGING测试环境
+gulp.task('product', function(cb) {
+    process.env.NODE_ENV = 'production';
+    buildAll(false, false);
+});
+
+// 代码生成
+const nunjucksRender = require('gulp-nunjucks-render');
+const nunjucks = require('nunjucks');
+
+// 生成目录清理
+gulp.task('gen-clean', function() {
+    return gulp.src('./generator/outputs', { read: false })
+        .pipe(clean({ force: true }));
+});
+
+// 代码生成任务
+gulp.task('gen', ['gen-clean'], function() {
+    let dataName = gutil.env.data;
+    if (!dataName) {
+        throw '请输入模块名, 例如：gulp gen --data photo';
+    }
+    console.log(`开始生成模块${dataName}的代码：`);
+
+    let genData = require(`./generator/datas/${dataName}.json`);
+
+    return gulp.src('./generator/templates/**/*')
+        .pipe(nunjucksRender({
+            data: genData,
+            path: ['./generator/templates'],
+            inheritExtension : true
+        }))
+        .pipe(rename(function(path) {
+            path.dirname = nunjucks.renderString(path.dirname, genData);
+            path.basename = nunjucks.renderString(path.basename, genData);
+        }))
+        .pipe(gulp.dest('./generator/outputs'));
 });
 
 function replaceBuildConfigs(stream) {
@@ -359,34 +420,3 @@ function getNPMPackageIds() {
     let bowerDependencies = _.keys(packageManifest.browser) || [];
     return _.concat(dependencies, bowerDependencies);
 }
-
-// 代码生成
-const nunjucksRender = require('gulp-nunjucks-render');
-const nunjucks = require('nunjucks');
-
-gulp.task('gen-clean', function() {
-    return gulp.src('./generator/outputs', { read: false })
-        .pipe(clean({ force: true }));
-});
-
-gulp.task('gen', ['gen-clean'], function() {
-    let dataName = gutil.env.data;
-    if (!dataName) {
-        throw '请输入模块名, 例如：gulp gen --data photo';
-    }
-    console.log(`开始生成模块${dataName}的代码：`);
-
-    let genData = require(`./generator/datas/${dataName}.json`);
-
-    return gulp.src('./generator/templates/**/*')
-        .pipe(nunjucksRender({
-            data: genData,
-            path: ['./generator/templates'],
-            inheritExtension : true
-        }))
-        .pipe(rename(function(path) {
-            path.dirname = nunjucks.renderString(path.dirname, genData);
-            path.basename = nunjucks.renderString(path.basename, genData);
-        }))
-        .pipe(gulp.dest('./generator/outputs'));
-});

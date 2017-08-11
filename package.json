@@ -28,6 +28,7 @@
     "gulp-image": "^2.0.1",
     "gulp-inject": "^4.1.0",
     "gulp-jshint": "^2.0.1",
+    "gulp-jsdoc3": "^1.0.1",
     "gulp-main-bower-files": "^1.5.2",
     "gulp-merge": "^0.1.1",
     "gulp-ng-annotate": "^2.0.0",
