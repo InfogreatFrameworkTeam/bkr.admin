@@ -2,11 +2,13 @@
 
 /**
  * @class TextFormatFilter 文本文字格式化
- * 将文本格式中的特殊文字转义 *
+ * 将文本格式中的特殊文字转义
  * @alias module:common/filters.TextFormatFilter
  *
  * @example
- *   ng-bind-html="model.memo | textFormat"
+ * model.memo = '第一行\r第二行';
+ * // 第一行<br/>第二行
+ * ng-bind-html="model.memo | textFormat"
  */
 function TextFormatFilter() {
     'ngInject';

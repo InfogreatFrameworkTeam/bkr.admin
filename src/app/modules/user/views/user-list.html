@@ -36,7 +36,7 @@
                             </label>
                             <div class="col-md-9 col-xs-12">
                                 <select name="deleteFlag" class="form-control"
-                                        ng-model="vm.searchCondition.deleteFlag" 
+                                        ng-model="vm.searchCondition.deleteFlag"
                                         ng-options="{{'deleteFlag' | codelistOptions}}">
                                     <option value=""></option>
                                 </select>
@@ -48,13 +48,13 @@
                     <button type="button" class="btn btn-primary x_btn" ng-click="vm.search()">
                         <i class="fa fa-search" aria-hidden="true"></i>
                         检索
-                    </button>                    
+                    </button>
                     <button type="button" class="btn btn-info x_btn" ng-csv="vm.getCsvData()" filename="用户一览.csv" lazy-load="true" csv-header="['ID', '用户名', '邮箱', '删除时间']">
                         <i class="fa fa-download" aria-hidden="true"></i>
                         下载CSV
                     </button>
                     <button type="button" class="btn btn-default x_btn" ng-click="vm.reset()">
-                         <i class="fa fa-undo" aria-hidden="true"></i>               
+                         <i class="fa fa-undo" aria-hidden="true"></i>
                         重置
                     </button>
                 </div>
@@ -63,7 +63,7 @@
     </div>
     <div class="x_panel">
         <div class="x_title">
-            <h4>检索结果 
+            <h4>检索结果
                 <small>检索到的用户列表
                     <a class="btn btn-success pull-right x_btn" ui-sref="main.user.new" data-permissions="user.edit">
                         <i class="fa fa-plus" aria-hidden="true"></i>新增
@@ -80,7 +80,7 @@
                     <td title="'照片'" width="10%">
                         <img class="img-responsive" ng-src="{{row.photo | imgView : 150}}" />
                     </td>
-                    <td title="'状态'" ng-bind="row.deletedAt | deleteFlagText"></td>
+                    <td title="'状态'" ng-bind="row.deletedAt"></td>
                     <td title="">
                         <a class="btn btn-info x_btn" ui-sref="main.user.detail({id: row.id})" ng-disabled="row.deletedAt">
                             <i class="fa fa-info" aria-hidden="true"></i>
@@ -89,11 +89,11 @@
                         <a class="btn btn-success x_btn" ui-sref="main.user.edit({id: row.id})" ng-disabled="row.deletedAt" data-permissions="user.edit">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             编辑
-                        </a>     
+                        </a>
                         <a class="btn btn-danger x_btn" ui-sref="main.user.delete({id: row.id})" ng-disabled="row.deletedAt" data-permissions="user.edit">
                             <i class="fa fa-remove" aria-hidden="true"></i>
                             删除
-                        </a>                       
+                        </a>
                     </td>
                 </tr>
             </table>

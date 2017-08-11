@@ -19,4 +19,8 @@ function declare(filterMap) {
 
 declare(filters);
 
+/**
+ * 共通过滤器模块
+ * @module common/filters
+ */
 module.exports = filtersModule;
