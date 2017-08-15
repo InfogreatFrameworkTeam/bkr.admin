@@ -1,12 +1,15 @@
 'use strict';
 /**
- * @class CommonConstant 共同定数
- * @alias module:common/constants.CommonConstant
+ * 共通定数
+ * @namespace CommonConstant
+ * @memberOf module:common/constants
  */
-let CommonConstants = {
-    /** @property {Object} loginState 用户登录的state */
+let CommonConstants =
+/** @lends module:common/constants.CommonConstant */
+{
+    /** Login的route state */
     loginState: 'login',
-    /** @property {Object} DATE_FORMAT 日期格式化格式 */
+    /** 日期格式 */
     dateFormat: 'YYYY-MM-DD'
 };
 

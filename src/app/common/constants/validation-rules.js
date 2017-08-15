@@ -1,10 +1,13 @@
 'use strict';
 
 /**
- * @class Expression 验证表达式
+ * 验证表达式
+ * @namespace Expression
  * @memberOf module:common/constants.ValidationRules
  */
-let _expression = {
+let _expression =
+/** @lends module:common/constants.ValidationRules.Expression */
+{
     /**
      * 必须Check
      * @param  {String} value 验证对象的值
@@ -48,7 +51,7 @@ let _expression = {
      * @param {Object} scope
      * @param {Object} element
      * @param {Object} attrs
-     * @param {int} 最小长度
+     * @param {int} param 最小长度
      * @return 是否正确
      */
     minlength: function(value, scope, element, attrs, param) {
@@ -64,7 +67,7 @@ let _expression = {
      * @param {Object} scope
      * @param {Object} element
      * @param {Object} attrs
-     * @param {int} 最小长度
+     * @param {int} param 最小长度
      * @return 是否正确
      */
     maxlength: function(value, scope, element, attrs, param) {
@@ -101,42 +104,65 @@ let _expression = {
 };
 
 /**
- * @class DefaultMsg 默认出错消息
+ * 默认出错消息
+ * @namespace DefaultMsg
  * @memberOf module:common/constants.ValidationRules
  */
-let _defaultMsg = {
+let _defaultMsg =
+/** @lends module:common/constants.ValidationRules.DefaultMsg */
+{
+    /** 必须Check出错消息 */
     required: {
         error: '请输入'
     },
+    /** URL Check出错消息 */
     url: {
         error: 'URL格式不正确',
     },
+    /** email Check出错消息 */
     email: {
         error: '邮箱地址的格式不正确',
     },
+    /** 数字 Check出错消息 */
     number: {
         error: '请输入数字'
     },
+    /** 最小长度 Check出错消息 */
     minlength: {
         error: '最小长度不正确'
     },
+    /** 最大长度 Check出错消息 */
     maxlength: {
         error: '最大长度不正确'
     },
+    /** 英数字 Check出错消息 */
     alphaNumber: {
     	error: '请输入英文或者数字'
     },
+    /** 手机号码 Check出错消息 */
     mobilephone: {
     	error: '请输入正确的电话号码'
     }
 };
 
+
 /**
- * @class ValidationRules 验证规则
- * @alias module:common/constants.ValidationRules
+ * 验证规则
+ * @namespace ValidationRules
+ * @memberOf module:common/constants
  */
-let ValidationRules = {
+let ValidationRules =
+/** @lends module:common/constants.ValidationRules */
+{
+    /**
+     * 验证表达式
+     * @type {module:common/constants.ValidationRules.Expression}
+     */
     expression: _expression,
+    /**
+     * 默认的验证消息
+     * @type {module:common/constants.ValidationRules.DefaultMsg}
+     */
     defaultMsg: _defaultMsg
 };
 

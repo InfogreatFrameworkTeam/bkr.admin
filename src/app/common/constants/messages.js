@@ -1,10 +1,13 @@
 'use strict';
 
 /**
- * @class MessageList 消息定义
- * @alias module:common/constants.MessageList
+ * 消息定义
+ * @namespace MessageList
+ * @memberOf module:common/constants
  */
-let MessageList = {
+let MessageList =
+/** @lends module:common/constants.MessageList */
+{
 	'error.system.error': '发生系统错误',
 	'error.required': '请输入{{p0}}。',
 	'error.url': '请输入正确格式的网址!',

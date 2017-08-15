@@ -1,11 +1,14 @@
 'use strict';
 
 /**
- * @class AppConfigs APP配置项
+ * App配置项
  * <p>环境相关的配置在build/buildConfig.json下</p>
- * @alias module:common/constants.AppConfigs
+ * @namespace AppConfigs
+ * @memberOf! module:common/constants
  */
-let AppConfigs = {
+let AppConfigs =
+/** @lends module:common/constants.AppConfigs */
+{
     /** 当前环境: dev、test、production */
 	ENV: '${ENV}',
     /** API的基础路径 */

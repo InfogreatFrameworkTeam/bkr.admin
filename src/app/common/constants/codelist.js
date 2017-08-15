@@ -1,10 +1,13 @@
 'use strict';
 
 /**
- * @class CodeList codelist配置项
- * @alias module:common/constants.CodeList
+ * CodeList配置项
+ * @namespace CodeList
+ * @memberOf module:common/constants
  */
-let CodeList = {
+let CodeList =
+/** @lends module:common/constants.CodeList */
+{
     /** 删除FLAG */
     'deleteFlag': {
         '0': '有效',
