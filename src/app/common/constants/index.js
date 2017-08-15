@@ -21,4 +21,8 @@ function declare(constantMap) {
 
 declare(constants);
 
+/**
+ * 共通常数模块
+ * @module common/constants
+ */
 module.exports = constantsModule;

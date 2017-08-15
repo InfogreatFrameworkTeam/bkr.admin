@@ -1,9 +1,16 @@
 'use strict';
+
+/**
+ * @class CodeList codelist配置项
+ * @alias module:common/constants.CodeList
+ */
 let CodeList = {
+    /** 删除FLAG */
     'deleteFlag': {
         '0': '有效',
         '1': '无效'
     },
+    /** 权限 */
     'permission': {
     	'user.view': '用户查看',
     	'user.edit': '用户编辑',

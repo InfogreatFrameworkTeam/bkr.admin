@@ -1,4 +1,9 @@
 'use strict';
+
+/**
+ * @class MessageList 消息定义
+ * @alias module:common/constants.MessageList
+ */
 let MessageList = {
 	'error.system.error': '发生系统错误',
 	'error.required': '请输入{{p0}}。',
