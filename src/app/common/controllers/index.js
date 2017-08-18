@@ -21,4 +21,8 @@ function declare(controllerMap) {
 
 declare(controllers);
 
+/**
+ * 共通控制器模块
+ * @module common/controllers
+ */
 module.exports = controllersModule;

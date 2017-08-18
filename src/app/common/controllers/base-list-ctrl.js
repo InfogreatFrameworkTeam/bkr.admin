@@ -8,12 +8,12 @@
  * @param ApiSrv    API服务
  * @param tableSrv  表服务
  * @param {Object} vm  控制器的value model
- * @param {Object} ctrlOpts
+ * @param {Object} ctrlOpts 控制选项
  * @param {String} ctrlOpts.modelName 模型的名称
- * @param {String} ctrlOpts.dataUrl 扩展 api url
+ * @param {String} [ctrlOpts.dataUrl] 一览检索api的url，默认是modelName + '/list'
  * @param {Function} [ctrlOpts.preSearchFn] 检索前处理
  * @param {Function} [ctrlOpts.postSearchFn] 检索后处理
- * @param {Object} ctrlOpts.defaultCondition 默认检索条件
+ * @param {Object} [ctrlOpts.defaultCondition] 默认检索条件
  *
  * @example
  *

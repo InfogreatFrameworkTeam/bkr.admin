@@ -10,14 +10,14 @@ const _ = require('lodash');
  * @param $state
  * @param $stateParams
  * @param $q
- * @param ApiSrv
+ * @param ApiSrv API服务
  * @param {Object} vm 控制器的value model
- * @param {Object} ctrlOpts
+ * @param {Object} ctrlOpts 控制选项
  * @param {String} ctrlOpts.modelName 模型的名称
  * @param {Function} [ctrlOpts.preSaveFn] 保存前处理，如果返回false或者Promise.reject的话则不做保存
  * @param {Function} [ctrlOpts.postSaveFn] 保存后处理
  * @param {Function} [ctrlOpts.preGetDetailFn] 取得详情前处理
- * @param {Function} [ctrlOpts.postGetDetailFn]
+ * @param {Function} [ctrlOpts.postGetDetailFn] 取得详情后处理
  */
 function BaseCrudCtrl($window, $state, $stateParams, $q, ApiSrv, MessageSrv, vm, ctrlOpts) {
     'ngInject';

@@ -1,9 +1,16 @@
 'use strict';
 
 /**
- * 数字输入控件
- * 在获得和失去焦点时格式化数字
- * @param {Object} $filter [description]
+ * @class NumberInputDirective 数字项目格式化控件
+ * <p>在获得和失去焦点时格式化数字</p>
+ * @alias module:common/directives.NumberInputDirective
+ * @param {Object} $filter
+ * @return {Directive}
+ *
+ * @example
+ * // model.amount = 12345;
+ * // 画面上表示为123,45，当控件获得焦点时显示为12345
+ * <input name="amount" numberInput ng-model="model.amount">
  */
 function NumberInputDirective($filter) {
     'ngInject';

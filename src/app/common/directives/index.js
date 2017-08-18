@@ -21,4 +21,8 @@ function declare(directiveMap) {
 
 declare(directives);
 
+/**
+ * 共通组件模块
+ * @module common/directives
+ */
 module.exports = directivesModule;

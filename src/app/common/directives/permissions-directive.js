@@ -10,7 +10,8 @@ const ADMIN_USER_ID = '1';
  * @return {Directive}
  *
  * @example
- *     permissions="user.view, user.edit"
+ * // 如果当前用户有user.view或者user.edit权限，则块可见。否则块不可见（从DOM树移出）
+ * <div permissions="user.view, user.edit">...</div>
  */
 function PermissionsDirective(SessionSrv) {
     'ngInject';
@@ -22,21 +23,20 @@ function PermissionsDirective(SessionSrv) {
     /**
      * _link
      * @param  scope
+     * @param {String} scope.permissions @允许访问的权限列表，用逗号分割
      * @param  elem
-     * @param  attrs
-     *             permissions 权限列表，以逗号分隔
      * @return directive
      */
-    function _link(scope, elem, attrs) {
+    function _link(scope, elem) {
         let currentUser = SessionSrv.getCurrentUser();
         if (_isAdmin(currentUser)) {
             return;
         }
 
-        let elePermissions = attrs.permissions.split(',');
+        let elePermissions = scope.permissions.split(',');
         let userPermissions = [];
         if (currentUser) {
-            userPermissions = currentUser.actionList || [];
+            userPermissions = currentUser.permissions || [];
         }
 
         let hasPermissions = false;
@@ -55,6 +55,9 @@ function PermissionsDirective(SessionSrv) {
 
     let directive = {
         restrict: 'A',
+        scope: {
+            permissions: '@'
+        },
         link: _link
     };
     return directive;

@@ -10,14 +10,12 @@ module.exports = {
             data: {
                 status: 1,
                 result: {
-                    id: 1,
+                    id: 2,
                     name: '管理员小李',
                     userImg: '/tmp/img.jpg',
                     permissions: [
                         'user.view',
                         'user.edit',
-                        'role.view',
-                        'role.edit'
                     ],
                     roleId: 1
                 }
