@@ -20,6 +20,7 @@ let MessageList =
     'error.fileExtension': '只能上传以下扩展名的文件{{p0}}',
     'error.fileSize': '只能上传不大于{{p0}}的文件',
     'error.fileLimit': '只能上传不超过{{p0}}个文件',
+    'error.auth': '您的权限无法访问指定功能,请尝试切换用户并重新登陆。',
 	'confirm.update': '确定要更新吗？',
 	'confirm.create': '确定要新建吗？',
 	'confirm.save': '确定要保存吗？',

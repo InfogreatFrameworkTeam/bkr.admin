@@ -1,7 +1,5 @@
 'use strict';
 
-let _ = require('lodash');
-
 /**
  * @class ApiSrv API服务
  * @alias module:common/services.ApiSrv
@@ -9,16 +7,32 @@ let _ = require('lodash');
  * @param $q
  * @param $http
  * @param $httpParamSerializer
- * @param $cookie
  * @param $state
  * @param AppConfigs           配置项
+ * @param CommonConstants      共同常数
  * @param MessageSrv           消息服务
+ * @param DateSrv              日期服务
+ * @param SessionSrv           Session服务
  */
-function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv, DateSrv, SessionSrv) {
+function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, CommonConstants, MessageSrv, DateSrv, SessionSrv) {
     'ngInject';
 
     const TOKEN_KEY = AppConfigs.USER_TOKEN_KEY;
     const API_SUCCESSED = '1';
+
+    /**
+     * @method module:common/services.ApiSrv#isSuccess 请求是否成功
+     * @param  {Object} res  Response
+     * @return {boolean}
+     */
+    function isResponseSuccess(res) {
+        // 处理返回结果
+        if (res.status + '' === API_SUCCESSED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * @method module:common/services.ApiSrv#exec API执行
@@ -27,6 +41,13 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
      * @param  {Object} [options]
      * @param  {String} [options.method] API方法，默认为POST
      * @return {Promise}        response promise
+     * @example
+     * ApiSrv.exec('user/changeDepartment', apiParams)
+            .then(function(data) {
+                // ... 成功处理
+            }).catch(function(reson) {
+                // ... 错误处理，一般不需要
+            });
      */
     function exec(url, params, options) {
         let d = $q.defer();
@@ -46,7 +67,7 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
         function _successFn(res) {
             if (AppConfigs.ENV !== 'production') {
                 console.info('API调用完了:' + res.config.url);
-                console.log(_.cloneDeep(res));
+                console.log(res);
             }
 
             // 设置token
@@ -58,8 +79,7 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
             // 处理返回结果
             let isJson = res.headers('content-type').match(/json/);
             if (isJson) {
-                let status = res.data.status + '';
-                if (status === API_SUCCESSED) {
+                if (isResponseSuccess(res.data)) {
                     // result ok
                     if (res.data.message) {
                         MessageSrv.success(res.data.message);
@@ -68,12 +88,6 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
                 } else {
                     // result error
                     _showError(res.data);
-
-                    // // 权限相关错误时，跳回Login画面
-                    // if (status === API_AUTH_ERR) {
-                    //     SessionSrv.clearCurrentUser();
-                    //     $state.go(CommonConstants.loginState);
-                    // }
 
                     return d.reject(res.data);
                 }
@@ -85,9 +99,19 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
         // 失败回调
         function _errorFn(res) {
             let data = res.data || {};
-            if (!_showError(data)) {
-                MessageSrv.error('error.system.error');
+
+            // 权限相关错误时，跳回Login画面
+            if (res.status === 403) {
+                SessionSrv.clearCurrentUser();
+                MessageSrv.error('error.auth');
+                $state.go(CommonConstants.loginState);
+            } else {
+                // 显示系统异常
+                if (!_showError(data)) {
+                    MessageSrv.error('error.system.error');
+                }
             }
+
             if (AppConfigs.ENV === 'dev') {
                 console.error('API调用失败:' + res.config.url);
                 console.error(res);
@@ -98,7 +122,6 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
         // prepare request
         options = options || {};
         params = params || {};
-
 
         // 将日期型参数都格式化为日期字符串
         DateSrv.convertDatesToDateStrings(params);
@@ -133,20 +156,6 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, MessageSrv,
             .then(_successFn)
             .catch(_errorFn);
         return d.promise;
-    }
-
-    /**
-     * @method module:common/services.ApiSrv#isSuccess 请求是否成功
-     * @param  {Object} res  Response
-     * @return {boolean}
-     */
-    function isResponseSuccess(res) {
-        // 处理返回结果
-        if (res.status + '' === API_SUCCESSED) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     return {

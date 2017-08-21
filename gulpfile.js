@@ -239,10 +239,16 @@ gulp.task('browser-sync', function() {
     browserSync.init({
         browser: ["chrome"],
         server: {
-            baseDir: './dist'
+            baseDir: './dist',
+            routes: {
+                '/docs': "docs"
+            }
         },
         middleware: function(req, res, next) {
             let fileHref = url.parse(req.url).href;
+            if (fileHref.startsWith('/docs')) {
+                return next();
+            }
 
             if (!ASSET_EXTENSION_REGEX.test(fileHref)) {
                 req.url = '/' + DEFAULT_FILE;

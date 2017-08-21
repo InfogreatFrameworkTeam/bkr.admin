@@ -21,4 +21,8 @@ function declare(serviceMap) {
 
 declare(services);
 
+/**
+ * 共通服务模块
+ * @module common/services
+ */
 module.exports = servicesModule;
