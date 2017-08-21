@@ -21,7 +21,8 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, CommonConst
     const API_SUCCESSED = '1';
 
     /**
-     * @method module:common/services.ApiSrv#isSuccess 请求是否成功
+     * 请求是否成功
+     * @method module:common/services.ApiSrv#isSuccess
      * @param  {Object} res  Response
      * @return {boolean}
      */
@@ -35,7 +36,8 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, CommonConst
     }
 
     /**
-     * @method module:common/services.ApiSrv#exec API执行
+     * API执行
+     * @method module:common/services.ApiSrv#exec
      * @param  {String} url     URL
      * @param  {Object} params  API参数
      * @param  {Object} [options]

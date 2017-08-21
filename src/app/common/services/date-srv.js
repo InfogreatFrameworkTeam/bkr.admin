@@ -14,7 +14,8 @@ function DateSrv() {
     const DATE_REGEX = /^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d(\.\d+)?([+-][0-2]\d(:?[0-5]\d)?|Z)$/;
 
     /**
-     * @method module:common/services.DateSrv#convertDateStringsToDates 将对象中的日期型字符串全部转换为日期型
+     * 将对象中的日期型字符串全部转换为日期型
+     * @method module:common/services.DateSrv#convertDateStringsToDates
      * @param  {Object} obj 对象
      * @return {Object}
      */
@@ -35,7 +36,8 @@ function DateSrv() {
     };
 
     /**
-     * @method module:common/services.DateSrv#convertDatesToDateStrings 将对象中的日期型全部转换为日期的字符串形式
+     * 将对象中的日期型全部转换为日期的字符串形式
+     * @method module:common/services.DateSrv#convertDatesToDateStrings
      * @param  {Object} obj 对象
      * @return {Object}
      */
@@ -64,7 +66,8 @@ function DateSrv() {
     };
 
     /**
-     * @method module:common/services.DateSrv#toDate 将日期字符串转为日期
+     * 将日期字符串转为日期
+     * @method module:common/services.DateSrv#toDate
      * @param  {String} str 日期字符串
      * @return {Date}
      */
