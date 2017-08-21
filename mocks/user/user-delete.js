@@ -6,8 +6,7 @@ module.exports = {
     '/api/user/delete': {
         POST: {
             data: {
-                status: 1,
-                message: '删除用户成功！'
+                status: '1'
             }
         }
     }

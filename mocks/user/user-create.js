@@ -9,8 +9,7 @@ module.exports = {
     '/api/user/create': {
         POST: {
             data: {
-                status: 1,
-                message: '新增用户成功！'
+                status: '1'
             }
         }
     }
