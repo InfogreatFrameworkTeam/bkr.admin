@@ -8,13 +8,14 @@
  * @param $http
  * @param $httpParamSerializer
  * @param $state
+ * @param localStorageService
  * @param AppConfigs           配置项
  * @param CommonConstants      共同常数
  * @param MessageSrv           消息服务
  * @param DateSrv              日期服务
  * @param SessionSrv           Session服务
  */
-function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, CommonConstants, MessageSrv, DateSrv, SessionSrv) {
+function ApiSrv($q, $http, $httpParamSerializer, $state, localStorageService, AppConfigs, CommonConstants, MessageSrv, DateSrv, SessionSrv) {
     'ngInject';
 
     const TOKEN_KEY = AppConfigs.USER_TOKEN_KEY;
@@ -75,7 +76,7 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, CommonConst
             // 设置token
             let accessToken = res.headers(TOKEN_KEY);
             if (accessToken) {
-                localStorage.setItem(TOKEN_KEY, accessToken);
+                localStorageService.set(TOKEN_KEY, accessToken);
             }
 
             // 处理返回结果
@@ -144,7 +145,7 @@ function ApiSrv($q, $http, $httpParamSerializer, $state, AppConfigs, CommonConst
         // 设置Token
         if (SessionSrv.getCurrentUser()) {
             req.headers = {};
-            req.headers[TOKEN_KEY] = localStorage.getItem(TOKEN_KEY);
+            req.headers[TOKEN_KEY] = localStorageService.get(TOKEN_KEY);
         }
 
         // 打印API参数

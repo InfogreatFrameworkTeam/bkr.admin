@@ -3,23 +3,12 @@
  */
 'use strict';
 
-
-
-function OnRun($rootScope, $state, SessionSrv, CodeList, SocketSrv) {
+function OnRun($rootScope, $state, SessionSrv, CodeList) {
 	'ngInject';
 
 	let LOGIN_STATE = 'login';
 
     $rootScope.codelist = CodeList;
-
-    function _connectSocket() {
-        let currentUser = SessionSrv.getCurrentUser();
-        if (currentUser) {
-            // 连接到socket服务
-            SocketSrv.connect();
-            SocketSrv.login();    
-        }
-    }
 
     /**
      * 监听路由状态变化
@@ -36,7 +25,6 @@ function OnRun($rootScope, $state, SessionSrv, CodeList, SocketSrv) {
 
     // 监听路由状态变化
     _watchStateChange();
-    _connectSocket();
 }
 
 module.exports = OnRun;

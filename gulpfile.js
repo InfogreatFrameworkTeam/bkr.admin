@@ -281,7 +281,7 @@ gulp.task('mock', function() {
         headers: {
             'Content-Language': 'zh-CN',
             'Content-Type': 'text/json;charset=UTF-8',
-            'Access-Control-Expose-Headers': 'X-head1' // TODO: should be delete
+            'Access-Control-Expose-Headers': 'x-access-token' // TODO: should be delete
         } // Set headers for all response, default blank
     };
     return gulp.src(paths.mock)

@@ -3,8 +3,8 @@
  */
 'use strict';
 
-function MainHeaderCtrl($state, $uibModal, $scope, 
-                        ApiSrv, SessionSrv, MessageSrv, SocketSrv) {
+function MainHeaderCtrl($state, $uibModal, $scope,
+                        ApiSrv, SessionSrv, MessageSrv) {
     'ngInject';
 
     let vm = this;
@@ -38,7 +38,6 @@ function MainHeaderCtrl($state, $uibModal, $scope,
             ApiSrv.exec('session/logout')
                 .then(function() {
                     SessionSrv.clearCurrentUser();
-                    SocketSrv.disconnect();
                     $state.go('login');
                 });
         }

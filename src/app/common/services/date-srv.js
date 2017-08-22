@@ -5,7 +5,6 @@ let moment = require('moment');
 /**
  * @class DateSrv 日期服务
  * @alias module:common/services.DateSrv
- *
  */
 function DateSrv() {
     'ngInject';

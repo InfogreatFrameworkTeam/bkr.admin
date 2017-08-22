@@ -41,8 +41,8 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
     }
 
     /**
-     * @public
-     * @method module:common/services.MessageSrv#getMessageParams 取得消息参数
+     * 取得消息参数
+     * @method module:common/services.MessageSrv#getMessageParams
      * @param  {String} params 消息参数
      */
     let _getMessageParams = function(params) {
@@ -51,8 +51,8 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
     };
 
     /**
-     * @public
-     * @method module:common/services.MessageSrv#confirm 弹出确认消息
+     * 弹出确认消息
+     * @method module:common/services.MessageSrv#confirm
      * @param  {String} msg 消息文本
      * @return {Promise}
      */
@@ -90,7 +90,6 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
 
     /**
      * 追加错误消息
-     * @public
      * @method module:common/services.MessageSrv#error
      * @param  {String} message 消息KEY或消息文本
      * @param  {String[]} [params] 消息参数
@@ -101,7 +100,6 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
 
     /**
      * 追加提示消息
-     * @public
      * @method module:common/services.MessageSrv#info
      * @param  {String} message 消息KEY或消息文本
      * @param  {String[]} [params] 消息参数
@@ -112,7 +110,6 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
 
     /**
      * 追加成功消息
-     * @public
      * @method module:common/services.MessageSrv#success
      * @param  {String} message 消息KEY或消息文本
      * @param  {String[]} [params] 消息参数
@@ -123,7 +120,6 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
 
     /**
      * 取得系统消息
-     * @public
      * @method module:common/services.MessageSrv#getMessage
      * @param  {String} message 消息KEY或消息文本
      * @param  {String[]} [params] 消息参数
@@ -142,6 +138,7 @@ function MessageSrv($q, $uibModal, $translate, growl, MessageList) {
     };
 
     return {
+        // 弹出确认消息框
         confirm: _confirm,
         // 追加错误消息
         error: _error,
