@@ -1,5 +1,12 @@
 <!-- top navigation -->
 <nav class="nav_menu top_nav" ng-controller="MainHeaderCtrl as vm">
+    <ul class="nav navbar-nav">
+        <li>
+            <a id="main-toggleFullScreen" class="navbar-link" href="" ng-click="vmMain.toggleFullScreen()">
+                <i class="fa" ng-class="{true: 'fa-angle-double-right', false: 'fa-angle-double-left'}[vmMain.isFullScreen]"></i>
+            </a>
+        </li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="" uib-dropdown>
             <a href id="user-profile-dropdown" class="user-profile dropdown-toggle" uib-dropdown-toggle>

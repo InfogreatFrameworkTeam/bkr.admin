@@ -107,7 +107,7 @@ input[type="radio"], input[type="checkbox"] {
     list-style: none outside none;
 }
 
-// -- .nav start -- 
+// -- .nav start --
 .nav.side-menu> li {
     position: relative;
     display: block;
@@ -216,11 +216,27 @@ ul.nav.child-menu li:after {
     background-color: transparent;
 }
 
-// -- .nav end -- 
+// -- .nav end --
 // -- main start--
+.main_fullscreen {
+    .main-left {
+        transform: translateX(-230px);
+    }
+    .main-right {
+        margin-left: 0;
+    }
+}
+
+#main-toggleFullScreen {
+    i {
+        font-size: 36px;
+    }
+}
+
 // - main left -
 .main-left {
     background: $main-left-color-bg;
+    transition: all 300ms 0s ease;
     .body & {
         width: $sidebar-width;
         min-height: 100%;
@@ -507,7 +523,7 @@ ul.msg_list li a .message {
 
 // -- panel end --
 
-// -- line start -- 
+// -- line start --
 .ln_solid {
     border-top: 1px solid #e5e5e5;
     color: #ffffff;
@@ -517,7 +533,7 @@ ul.msg_list li a .message {
 }
 // -- line end --
 
-// -- button start -- 
+// -- button start --
 .x_btn {
     min-width: $button-min-width-action;
     & > .fa {
@@ -526,7 +542,7 @@ ul.msg_list li a .message {
 }
 // -- button end --
 
-// -- text start -- 
+// -- text start --
 .x_text {
     padding-top: 7px;
 }
@@ -537,4 +553,4 @@ ul.msg_list li a .message {
     margin-top: 2px;
     color: $brand-danger;
 }
-// -- text end -- 
+// -- text end --

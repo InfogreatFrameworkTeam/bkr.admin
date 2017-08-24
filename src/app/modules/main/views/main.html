@@ -1,4 +1,4 @@
-<div class="container-flud body">
+<div class="container-flud body" ng-class="{'main_fullscreen':vmMain.isFullScreen}" ng-controller="MainCtrl as vmMain">
     <div class="main-left col-md-3" ng-include="'main/views/main-sidebar.html'"></div>
     <div class="main-right">
 	    <div ng-include="'main/views/main-header.html'"></div>
