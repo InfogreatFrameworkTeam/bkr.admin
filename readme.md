@@ -48,7 +48,6 @@
 1. 表格组件
 	[ng-table](https://github.com/esvit/ng-table)
 
-1. 上传组件
-	1. [七牛JS SDK](http://developer.qiniu.com/code/v6/sdk/javascript.html)
+1. 多选下拉组件
+    [angularjs-dropdown-multiselect](https://github.com/dotansimha/angularjs-dropdown-multiselect)
 
-	1. [plupload](http://www.plupload.com/)

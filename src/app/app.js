@@ -9,9 +9,11 @@ require('angular-growl-v2');
 require('angular-translate');
 require('angular-validation');
 require('angular-block-ui');
+require('angularjs-dropdown-multiselect');
 require('ng-table');
 require('ng-csv');
 require('moment');
+require('babel-polyfill');
 
 // app modules
 require('./common/constants');
@@ -30,6 +32,7 @@ const requires = [
 	'LocalStorageModule',
 	'ngSanitize',
 	'angular-growl',
+	'angularjs-dropdown-multiselect',
 	'pascalprecht.translate',
 	'validation',
 	'blockUI',

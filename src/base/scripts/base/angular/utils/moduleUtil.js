@@ -4,14 +4,20 @@ const _ = require('lodash');
 const POSTFIX_CONTROLLER = 'ctrl';
 const POSTFIX_ROUTER = 'routers';
 const POSTFIX_SERVICES = 'srv';
+const POSTFIX_CONSTANTS = 'constants';
 
 /**
- * 导入文件夹下的所有模块
+ * angular模块用工具集
+ * @module base/angular/utils/moduleUtils
+ */
+
+ /**
+ * 导入modules目录下的所有模块
  * @param  {String} moduleName  模块名称
  * @param  {Object} moduleItems 模块内文件
  * @return {Object}             angularjs的模块
  */
-function importModule(moduleName, moduleItems) {
+exports.importModule = function(moduleName, moduleItems) {
 	function _getItemCatagory(key) {
 	    let arr = _.split(key, '-');
 	    if (arr.length === 1) {
@@ -35,7 +41,8 @@ function importModule(moduleName, moduleItems) {
 	        } else if (catagory === POSTFIX_ROUTER) {
 	            appModules.config(item);
 	        } else if (catagory === POSTFIX_SERVICES) {
-	            appModules.factory(item.name, item.fn);	            
+	            appModules.factory(item.name, item.fn);
+	        } else if (catagory === POSTFIX_CONSTANTS) {
 	        } else {
 	            _declare(appModules, item);
 	        }
@@ -47,8 +54,4 @@ function importModule(moduleName, moduleItems) {
     _declare(appModules, moduleItems);
 
     return appModules;
-}
-
-module.exports = {
-    importModule: importModule
 };

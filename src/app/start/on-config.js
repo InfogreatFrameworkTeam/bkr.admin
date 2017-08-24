@@ -2,7 +2,15 @@
 
 let $ = require('jquery');
 
-function appConfig($locationProvider,
+/**
+ * 程序启动模块
+ * @module start
+ */
+/**
+ * @class OnConfig 程序启动时的配置
+ * @alias module:start.OnConfig
+ */
+function OnConfig($locationProvider,
     $urlRouterProvider,
     growlProvider,
     $translateProvider,
@@ -41,4 +49,4 @@ function appConfig($locationProvider,
     });
 }
 
-module.exports = appConfig;
+module.exports = OnConfig;

@@ -1,9 +1,10 @@
-/**
- * APP首次启动时的事件
- */
 'use strict';
 
-function OnRun($rootScope, $state, SessionSrv, CodeList) {
+/**
+ * @class OnRun APP首次启动时的初始化
+ * @alias module:start.OnRun
+ */
+function OnRun($rootScope, $state, SessionSrv, CodeList, MultiselectTranslationTexts) {
 	'ngInject';
 
 	let LOGIN_STATE = 'login';
@@ -25,6 +26,9 @@ function OnRun($rootScope, $state, SessionSrv, CodeList) {
 
     // 监听路由状态变化
     _watchStateChange();
+
+    // 多选下拉框的翻译文本
+    $rootScope.multiselectTranslationTexts = MultiselectTranslationTexts;
 }
 
 module.exports = OnRun;
