@@ -3,7 +3,7 @@
  */
 'use strict';
 
-function UserNewCtrl($controller) {
+function UserNewCtrl($controller, UploadSrv) {
     'ngInject';
 
     let vm = this;
@@ -12,6 +12,8 @@ function UserNewCtrl($controller) {
             modelName: 'user'
         };
     angular.extend(this, $controller('BaseCrudCtrl', { vm: vm, ctrlOpts }));
+
+    vm.uploader = UploadSrv.createImageUploader();
 }
 
 module.exports = {

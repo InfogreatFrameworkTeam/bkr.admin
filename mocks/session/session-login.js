@@ -10,7 +10,7 @@ module.exports = {
             data: {
                 status: 1,
                 result: {
-                    id: 2,
+                    id: 1,
                     name: '管理员小李',
                     userImg: '/tmp/img.jpg',
                     permissions: [

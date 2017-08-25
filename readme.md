@@ -48,6 +48,16 @@
 1. 表格组件
 	[ng-table](https://github.com/esvit/ng-table)
 
+1. 上传组件
+    [angular-file-upload](https://github.com/nervgh/angular-file-upload)
+
 1. 多选下拉组件
     [angularjs-dropdown-multiselect](https://github.com/dotansimha/angularjs-dropdown-multiselect)
+
+1. 日期库
+    [moment](http://momentjs.com/docs/) 提供了各种日期检查、操作、格式化
+
+1. API Mock组件
+    [gulp-rest-emulator](https://github.com/temrdm/gulp-rest-emulator)
+    分状态用法：API Url后加上?restEmulatorPreset=[prefix]
 

@@ -2,7 +2,6 @@
  * 控制器：主画面
  */
 'use strict';
-let _ = require('lodash');
 
 function MainCtrl() {
 	'ngInject';
@@ -16,7 +15,7 @@ function MainCtrl() {
      */
     vm.toggleFullScreen = function() {
         vm.isFullScreen = !vm.isFullScreen;
-    }
+    };
 }
 
 module.exports = {

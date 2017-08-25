@@ -10,6 +10,7 @@ require('angular-translate');
 require('angular-validation');
 require('angular-block-ui');
 require('angularjs-dropdown-multiselect');
+require('angular-file-upload');
 require('ng-table');
 require('ng-csv');
 require('moment');
@@ -33,6 +34,7 @@ const requires = [
 	'ngSanitize',
 	'angular-growl',
 	'angularjs-dropdown-multiselect',
+	'angularFileUpload',
 	'pascalprecht.translate',
 	'validation',
 	'blockUI',
