@@ -11,7 +11,7 @@ module.exports = {
                 status: 1,
                 result: {
                     id: '1',
-                    url: '/images/tmp/test_upload.jpg'
+                    url: 'images/tmp/test_upload.jpg'
                 }
             }
         }

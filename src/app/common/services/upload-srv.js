@@ -1,6 +1,5 @@
 'use strict';
 
-const IMAGE_SUFFIXS = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
 const DEFAULT_SIZE_LIMIT = 5 * 1024 * 1024;
 const DEFAULT_FILE_LIMIT = 5;
 const DEFAULT_UPLOAD_URL = 'file/upload';
@@ -9,15 +8,13 @@ const DEFAULT_UPLOAD_URL = 'file/upload';
  * @class UploadSrv 上传服务
  * @alias module:common/services.UploadSrv
  */
-function UploadSrv($rootScope, FileUploader, FileItem, ApiSrv, MessageSrv, AppConfigs) {
+function UploadSrv($rootScope, FileUploader, FileItem, ApiSrv, MessageSrv, AppConfigs, CommonConstants) {
     'ngInject';
 
     /**
      * 创建上传组件
-     * @method module:common/services.UploadSrv#createUploader     *
-     * @param  {Object} fileParams  上传文件参数
-     * @param  {String} fileParams.fileType  参考012文件上传分类汇总中的序号
-     * @param  {String} [fileParams.targetId]  目标对象ID
+     * @method module:common/services.UploadSrv#createUploader
+     * @param  {String} fileType 上传文件的类型
      * @param  {Object} [opts]  可选参数
      * @param  {function} [opts.postCompleteItem]   上传文件成功后回调
      * @param  {boolean} [opts.imageOnly]   仅可上传图片文件   default false
@@ -26,12 +23,13 @@ function UploadSrv($rootScope, FileUploader, FileItem, ApiSrv, MessageSrv, AppCo
      * @param  {boolean} [opts.isForCkeditor]   是否是Ckeditor上传 default false
      *
      * @example
-     *      vm.uploader = UploadSrv.createImageUploader({fileType: 1});
-     *      let uploadFiles = vm.uploader.getUploadedFiles();
+     * const FILE_TYPE_USER_PROFILE = 1;
+     * vm.uploader = UploadSrv.createImageUploader(FILE_TYPE_USER_PROFILE);
+     * let uploadFiles = vm.uploader.getUploadedFiles();
      *
      * @return {Object} uploader 参考angular-file-uploader
      */
-    let createUploader = function(fileParams, opts) {
+    let createUploader = function(fileType, opts) {
         let uploader;
         opts = opts || {};
 
@@ -72,20 +70,10 @@ function UploadSrv($rootScope, FileUploader, FileItem, ApiSrv, MessageSrv, AppCo
 
         // 选择文件后事件
         function _onAfterAddingFile(item) {
-            // _getFileSign(item).then(function(result) {
-            //     item.url = result.host;
-            //     let formData = {
-            //         'key': result.key,
-            //         'policy': result.policy,
-            //         'OSSAccessKeyId': result.accessid,
-            //         'success_action_status': '200', //让服务端返回200,不然，默认会返回204
-            //         'callback': result.callback,
-            //         'signature': result.signature
-            //     };
-            //     item.formData.push(formData);
-
-            //     item.upload();
-            // });
+            let formData = {
+                'fileType': fileType
+            };
+            item.formData.push(formData);
             item.upload();
         }
 
@@ -197,7 +185,7 @@ function UploadSrv($rootScope, FileUploader, FileItem, ApiSrv, MessageSrv, AppCo
 
         // 是否只能上传图片，如果是则加载后缀名过滤
         if (opts.imageOnly) {
-            _addSuffixsFilter(IMAGE_SUFFIXS, uploader);
+            _addSuffixsFilter(CommonConstants.imageSuffixes, uploader);
         }
 
         // 文件大小过滤
@@ -223,20 +211,20 @@ function UploadSrv($rootScope, FileUploader, FileItem, ApiSrv, MessageSrv, AppCo
      * 创建上传图片组件
      * @method module:common/services.UploadSrv#createImageUploader
      */
-    let createImageUploader = function(fileParams, opts) {
+    let createImageUploader = function(fileType, opts) {
         opts = opts || {};
         opts.imageOnly = true;
-        return createUploader(fileParams, opts);
+        return createUploader(fileType, opts);
     };
 
     /**
      * 创建上传图片组件
      * @method module:common/services.UploadSrv#createCkUploader
      */
-    let createCkUploader = function(fileParams, opts) {
+    let createCkUploader = function(fileType, opts) {
         opts = opts || {};
         opts.isForCkeditor = true;
-        return createUploader(fileParams, opts);
+        return createUploader(fileType, opts);
     };
 
     return {

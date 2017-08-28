@@ -10,7 +10,9 @@ let CommonConstants =
     /** Login的route state */
     loginState: 'login',
     /** 日期格式 */
-    dateFormat: 'YYYY-MM-DD'
+    dateFormat: 'YYYY-MM-DD',
+    /** 图片后缀 */
+    imageSuffixes: ['jpg', 'jpeg', 'png', 'gif', 'bmp']
 };
 
 module.exports = {
