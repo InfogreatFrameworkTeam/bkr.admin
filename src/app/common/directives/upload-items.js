@@ -4,9 +4,12 @@
 /**
  * @class UploadItems 上传文件的展示
  * @alias module:common/directives.UploadItems
+ * @param {Uploader} uploader 上传组件实例
  * @return {Directive}
+ *
+ * @example
+ * <div upload-items="vm.uploader" ></div>
  */
-
 function UploadItems(FileSrv) {
     'ngInject';
 
