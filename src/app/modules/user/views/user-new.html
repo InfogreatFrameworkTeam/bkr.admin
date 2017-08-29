@@ -34,8 +34,9 @@
                     <label for="mail" class="control-label col-md-3 col-sm-3 col-xs-12">头像：</label>
                     <div class="col-sm-9 col-xs-12">
                         <input type="file" nv-file-select uploader="vm.uploader"/>
-                        <div class="img-thumbnail uploadItem-wrapper" ng-repeat="item in vm.uploader.queue" upload-item="item">
-                        </div>
+             <!--            <div class="img-thumbnail uploadItem-wrapper" ng-repeat="item in vm.uploader.queue" upload-item="item">
+                        </div> -->
+                        <div class="user-profile" upload-items="vm.uploader" ></div>
                     </div>
                 </div>
                 <div class="ln_solid"></div>
