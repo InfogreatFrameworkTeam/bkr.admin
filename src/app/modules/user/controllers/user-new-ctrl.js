@@ -13,7 +13,7 @@ function UserNewCtrl($controller, UploadSrv) {
         };
     angular.extend(this, $controller('BaseCrudCtrl', { vm: vm, ctrlOpts }));
 
-    vm.uploader = UploadSrv.createImageUploader({
+    vm.uploader = UploadSrv.createImageUploader('user-profile', {
         fileLimit: 1
     });
 }

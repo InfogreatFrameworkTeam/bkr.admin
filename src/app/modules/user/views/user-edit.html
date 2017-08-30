@@ -31,9 +31,10 @@
                 <div class="form-group">
                     <label for="mail" class="control-label col-md-3 col-sm-3 col-xs-12">头像：</label>
                     <div class="col-sm-9 col-xs-12">
-                        <button id="upload-btn" type="button" class="btn btn-info x_btn" ng-click="vm.upload()">上传</button>
-                        <img class="img-thumbnail" ng-src="{{vm.uploader.getFile()}}" ng-show="vm.uploader.getFile()" />
-                        <img class="img-thumbnail" ng-src="{{vm.model.photo | imgView : 150}}" ng-show="!vm.uploader.getFile()" />
+                        <input type="file" nv-file-select uploader="vm.uploader"/>
+                        <div class="row">
+                            <div class="col-sm-3" upload-items="vm.uploader" ></div>
+                        </div>
                     </div>
                 </div>
                 <div class="ln_solid"></div>

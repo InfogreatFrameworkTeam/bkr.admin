@@ -24,7 +24,7 @@ function UploadItems(FileSrv) {
                 <div class="uploadItem-remove">
                     <a class="fa fa-remove" href="" ng-click="uploadItem.remove()"></a>
                 </div>
-                <img class="uploadItem-image img-responsive" ng-src="{{uploadItem.result.url}}" ng-if="vmUploadItem.isImage(uploadItem)">
+                <img class="uploadItem-image" ng-src="{{uploadItem.result.url}}" ng-if="vmUploadItem.isImage(uploadItem)">
                 <p class="uploadItem-fileName" ng-bind="vmUploadItem.getFileName(uploadItem)" ng-if="!vmUploadItem.isImage(uploadItem)">
              </div>
         </div>

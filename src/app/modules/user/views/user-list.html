@@ -77,10 +77,10 @@
                     <td title="'序号'" ng-bind="vm.getIndex($index)"></td>
                     <td title="'用户名'" ng-bind="row.name"></td>
                     <td title="'邮箱'" ng-bind="row.mail"></td>
-                    <td title="'照片'" width="10%">
-                        <img class="img-responsive" ng-src="{{row.photo}}" />
+                    <td title="'照片'" width="10%" class="user-profile text-center">
+                        <img ng-src="{{row.photo}}" />
                     </td>
-                    <td title="'状态'" ng-bind="row.deletedAt"></td>
+                    <td title="'状态'" ng-bind="row.deleteFlag | codeText: 'deleteFlag'"></td>
                     <td title="">
                         <a class="btn btn-info x_btn" ui-sref="main.user.detail({id: row.id})" ng-disabled="row.deletedAt">
                             <i class="fa fa-info" aria-hidden="true"></i>
